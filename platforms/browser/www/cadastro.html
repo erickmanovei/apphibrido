@@ -44,7 +44,11 @@
 	<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="js/db.js"></script>
     <title>App Híbrido</title>
+	<script>
+		onBodyLoad();
+	</script>
 </head>
 
 <body>
@@ -60,8 +64,8 @@
 			<label for="text-basic">CPF:</label>
 			<input type="text" name="cpf" id="cpf" value="">
 			
-			<button class="ui-btn" id="cadastrar">Cadastrar</button>
-			<button class="ui-btn ui-btn-b ui-icon-delete ui-btn-icon-left ui-shadow-icon" id="cancelar" onclick="javascript:location.href='index.html';">Cancelar</button>
+			<button class="ui-btn" id="cadastrar" onclick="CadastroIndividual(document.getElementById('nome').value, document.getElementById('sobrenome').value, document.getElementById('cpf').value);">Cadastrar</button>
+			<button class="ui-btn ui-btn-b ui-icon-delete ui-btn-icon-left ui-shadow-icon" id="cancelar" onclick="javascript:location.href='index.html';">Voltar</button>
         
     </div>
     <script type="text/javascript" src="cordova.js"></script>

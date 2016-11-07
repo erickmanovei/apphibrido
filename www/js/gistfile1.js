@@ -14,7 +14,7 @@ function errorHandler(transaction, error) {
 
 // this is called when a successful transaction happens
 function successCallBack() {
-   console.log("DEBUGGING: success");
+   alert("DEBUGGING: success");
 }
 
 function nullHandler(){};
@@ -24,12 +24,12 @@ function onBodyLoad(){
 
 	// This alert is used to make sure the application is loaded correctly
 	// you can comment this out once you have the application working
-	console.log("DEBUGGING: we are in the onBodyLoad() function");
+	alert("DEBUGGING: we are in the onBodyLoad() function");
 
 	 if (!window.openDatabase) {
 	   // not all mobile devices support databases  if it does not, the following alert will display
 	   // indicating the device will not be albe to run this application
-	   console.log('Databases are not supported in this browser.');
+	   alert('Databases are not supported in this browser.');
 	   return;
 	 }
 
@@ -63,27 +63,15 @@ function ListDBValues() {
 	// content and not just keep repeating lines
 	// this next section will select all the content from the User table and then go through it row by row
 	// appending the UserId  FirstName  LastName to the  #lbUsers element on the page
-	
-    
 
 	 db.transaction(function(transaction) {
 	   transaction.executeSql('SELECT * FROM pessoas;', [],
 		 function(transaction, result) {
 		  if (result != null && result.rows != null) {
-			
-			var ul = document.createElement("ul");	
-			
 			for (var i = 0; i < result.rows.length; i++) {
-				var row = result.rows.item(i);
-				
-				var li = document.createElement("li");
-				li.appendChild(document.createTextNode(row.id + " " + row.nome +" "+  row.sobrenome + " " + row.cpf));
-				ul.appendChild(li);
-			  //alert(row.id + " " + row.nome + row.sobrenome + " " + row.cpf);
+			  var row = result.rows.item(i);
+			  alert(row.id + " " + row.nome + row.sobrenome + " " + row.cpf);
 			}
-				var div = document.getElementById('lista');
-				ul.setAttribute("data-role", "listview");
-				div.appendChild(ul);
 		  }
 		 },errorHandler);
 	 },errorHandler,nullHandler);
@@ -93,7 +81,7 @@ function ListDBValues() {
 }
 
 // this is the function that puts values into the database using the values from the text boxes on the screen
-function CadastroIndividual(nome, sobrenome, cpf) {
+function AddValueToDB() {
 
 	 if (!window.openDatabase) {
 	   alert('Databases are not supported in this browser.');
@@ -102,50 +90,12 @@ function CadastroIndividual(nome, sobrenome, cpf) {
 
 	// this is the section that actually inserts the values into the User table
 	 db.transaction(function(transaction) {
-	   transaction.executeSql('INSERT INTO pessoas(nome, sobrenome, cpf) VALUES (?,?,?)',[nome,sobrenome, cpf],
+	   transaction.executeSql('INSERT INTO pessoas(nome, sobrenome, cpf) VALUES (?,?,?)',["Erick","Nilson", "01819242501"],
 		 nullHandler,errorHandler);
 	   });
-	
-	alert("Cadastro Realizado!");
-	// this calls the function that will show what is in the User table in the database
-	 return false;
-
-}
-
-function CadastroEmLote(quantidade) {
-
-	 if (!window.openDatabase) {
-	   alert('Databases are not supported in this browser.');
-	   return;
-	 }
-
-	// this is the section that actually inserts the values into the User table
-	 db.transaction(function(transaction) {
-			for(i=0; i<quantidade; i++){
-				transaction.executeSql('INSERT INTO pessoas(nome, sobrenome, cpf) VALUES (?,?,?)',["Nome " + i,"Sobrenome" + i, "CPF" + i], nullHandler,errorHandler);
-			}	   
-	   });
-	   alert("Cadastro Realizado!");
 
 	// this calls the function that will show what is in the User table in the database
-
-	 return false;
-
-}
-
-function LimparTabela() {
-
-	 if (!window.openDatabase) {
-	   alert('Databases are not supported in this browser.');
-	   return;
-	 }
-
-	// this is the section that actually inserts the values into the User table
-	 db.transaction(function(transaction) {
-	   transaction.executeSql('DELETE from pessoas');
-	   });
-	alert("Limpeza Realizada!");
-	// this calls the function that will show what is in the User table in the database
+	 ListDBValues();
 	 return false;
 
 }
