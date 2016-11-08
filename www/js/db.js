@@ -125,7 +125,7 @@ function CadastroEmLote(quantidade) {
 				transaction.executeSql('INSERT INTO pessoas(nome, sobrenome, cpf) VALUES (?,?,?)',["Nome " + i,"Sobrenome" + i, "CPF" + i], nullHandler,errorHandler);
 			}	   
 	   });
-	   alert("Cadastro Realizado!");
+	   //alert("Cadastro Realizado!");
 
 	// this calls the function that will show what is in the User table in the database
 
