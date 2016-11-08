@@ -123,9 +123,10 @@ function CadastroEmLote(quantidade) {
 	 db.transaction(function(transaction) {
 			for(i=0; i<quantidade; i++){
 				transaction.executeSql('INSERT INTO pessoas(nome, sobrenome, cpf) VALUES (?,?,?)',["Nome " + i,"Sobrenome" + i, "CPF" + i], nullHandler,errorHandler);
+				document.getElementById('status').value = "Nome " + i;
 			}	   
 	   });
-	   alert("Cadastro Realizado!");
+	   //alert("Cadastro Realizado!");
 
 	// this calls the function that will show what is in the User table in the database
 
