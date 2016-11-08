@@ -15,6 +15,17 @@ function errorHandler(transaction, error) {
 // this is called when a successful transaction happens
 function successCallBack() {
    console.log("DEBUGGING: success");
+   
+}
+
+function sucessoCadastro() {
+   alert("Cadastro Realizado");
+   
+}
+
+function erroCadastro() {
+   alert("Erro ao cadastrar");
+   
 }
 
 function nullHandler(){};
@@ -123,9 +134,10 @@ function CadastroEmLote(quantidade) {
 	 db.transaction(function(transaction) {
 			for(i=0; i<quantidade; i++){
 				transaction.executeSql('INSERT INTO pessoas(nome, sobrenome, cpf) VALUES (?,?,?)',["Nome " + i,"Sobrenome" + i, "CPF" + i], nullHandler,errorHandler);
-				document.getElementById('status').value = "Nome " + i;
 			}	   
-	   });
+	   },
+		erroCadastro,sucessoCadastro
+	   );
 	   //alert("Cadastro Realizado!");
 
 	// this calls the function that will show what is in the User table in the database
