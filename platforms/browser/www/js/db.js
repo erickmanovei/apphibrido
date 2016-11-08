@@ -4,7 +4,7 @@ var db;
 var shortName = 'PS';
 var version = '1.0';
 var displayName = 'PS';
-var maxSize = 65535;
+var maxSize = 65535000000000;
 
 // this is called when an error happens in a transaction
 function errorHandler(transaction, error) {
