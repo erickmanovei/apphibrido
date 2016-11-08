@@ -28,6 +28,16 @@ function erroCadastro() {
    
 }
 
+function sucessoLimpeza() {
+   alert("Limpeza Realizado");
+   
+}
+
+function erroLimpeza() {
+   alert("Erro ao Limpar");
+   
+}
+
 function nullHandler(){};
 
 // called when the application loads
@@ -113,9 +123,10 @@ function CadastroIndividual(nome, sobrenome, cpf) {
 
 	// this is the section that actually inserts the values into the User table
 	 db.transaction(function(transaction) {
-	   transaction.executeSql('INSERT INTO pessoas(nome, sobrenome, cpf) VALUES (?,?,?)',[nome,sobrenome, cpf],
-		 nullHandler,errorHandler);
-	   });
+	   transaction.executeSql('INSERT INTO pessoas(nome, sobrenome, cpf) VALUES (?,?,?)',[nome,sobrenome, cpf], nullHandler,errorHandler);
+	   },
+	   erroCadastro,sucessoCadastro
+	   );
 	
 	alert("Cadastro Realizado!");
 	// this calls the function that will show what is in the User table in the database
@@ -156,8 +167,9 @@ function LimparTabela() {
 	// this is the section that actually inserts the values into the User table
 	 db.transaction(function(transaction) {
 	   transaction.executeSql('DELETE from pessoas');
-	   });
-	alert("Limpeza Realizada!");
+	   },
+	   erroLimpeza,sucessoLimpeza
+	   );
 	// this calls the function that will show what is in the User table in the database
 	 return false;
 
